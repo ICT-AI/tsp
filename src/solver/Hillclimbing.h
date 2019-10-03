@@ -2,10 +2,28 @@
 #include <cstdlib>
 #include <list>
 #include "AbstractSolver.h"
+#include <iostream>
+#include <cstdio>
+#include <string>
+#include <vector>
+#include <cmath>
+#include <set>
+#include <sys/time.h>
+#include <unistd.h>
+
+#include<time.h>
+
+#pragma comment(lib, "freeglut.lib")
+#pragma comment(lib, "glew32.lib")
 
 using namespace std;
 
-class Hillclimbing: public AbstractSolver {
+vector<int> id;
+vector<pair<double,double> > coord;
+
+vector<pair<double,double> > nodes;//this is for draw path
+
+class LKMatrix: public AbstractSolver {
  protected:
   /**
    * Solve TSP of current graph.
@@ -14,8 +32,26 @@ class Hillclimbing: public AbstractSolver {
   void solve() override;
 
  public:
-  Hillclimbing() = default;
+  //LKMatrix() = default;
+  //LKMatrix(Graph *g);
+  int size;
+  LKMatrix() = default;
+  LKMatrix(vector<pair<double, double> > &coords, vector<int> &ids);
+  vector<int> getCurrentTour();
+  double getCurrentTourDistance();
+  void optimizeTour(); //solve()
+  void printTour();
+  void printTourIds();
+  void indexForDraw();
 
-  Hillclimbing(Graph *g);
-  void move(int startPoint); //For change edges.
+private:
+  //vector<int> tour ;
+  vector<vector<int> > edgeFlags;
+  vector<pair<double, double> > coords;
+  vector<int> ids;
+  void joinLocations(int i, int j);
+  vector<vector<double>> edgeDistances;
+  void LKMove(int tourStart);
+  void reverse(int start, int end);
+  bool isTour();
 };
