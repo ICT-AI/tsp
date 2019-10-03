@@ -9,7 +9,7 @@ void Timer::start() {
 }
 
 double Timer::getElapsedTime() {
-  chrono::duration<double> elapsed = chrono::system_clock::now() - this->startTime;
+  chrono::duration<double> elapsed = chrono::system_clock::now() - this->startTime; // measure elapsed time
 
   return elapsed.count();
 }
