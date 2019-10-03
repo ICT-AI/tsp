@@ -22,7 +22,7 @@ double AbstractSolver::getElapsedTime() {
   return this->elapsedTime;
 }
 
-vector<int> AbstractSolver::getTour() {
+vector<int>& AbstractSolver::getTour() {
   return this->tour;
 }
 
