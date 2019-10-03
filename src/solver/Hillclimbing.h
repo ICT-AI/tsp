@@ -32,10 +32,9 @@ class LKMatrix: public AbstractSolver {
   void solve() override;
 
  public:
-  //LKMatrix() = default;
-  //LKMatrix(Graph *g);
   int size;
   LKMatrix() = default;
+  LKMatrix(Graph *g);
   LKMatrix(vector<pair<double, double> > &coords, vector<int> &ids);
   vector<int> getCurrentTour();
   double getCurrentTourDistance();

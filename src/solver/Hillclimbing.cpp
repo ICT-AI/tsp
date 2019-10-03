@@ -8,9 +8,9 @@ pair<int, int> make_sorted_pair(int x, int y) {
   }
 }
 
-/***LKMatrix::LKMatrix(Graph *g) {
+LKMatrix::LKMatrix(Graph *g) {
     this->graph = g;
-}***/
+}
 
 LKMatrix::LKMatrix(vector<pair<double, double> > &coords, vector<int> &ids) {
   this->coords = coords;
