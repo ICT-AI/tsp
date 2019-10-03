@@ -62,7 +62,7 @@ void SequentialGreedy::solve(int iteration, Timer &timer) {
       this->cost = (int)cost;
       this->tour.assign(tour.begin(), tour.end());
     }
-    
+
     this->actualIteration++;  // increase solve count
   }
 }
