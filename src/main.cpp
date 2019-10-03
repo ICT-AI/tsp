@@ -5,11 +5,11 @@
 #include "solver/SequentialGreedy.h"
 #include "./helper/Timer.h"
 
-/*****************************/
-/**** Set your test here. ****/
-/*****************************/
-static const char* DATA_FILE = "dga9698.txt";
-static const int ITERATION = 3;
+/************************************/
+/**** Set your test config here. ****/
+/************************************/
+static const char* DATA_FILE = "xpr2308.txt";
+static const int ITERATION = INT_MAX;
 static const double TIME_LIMIT = 58.;
 
 void runTSP(const char *data_file_name, AbstractSolver *solver, int iteration, double time_limit){
