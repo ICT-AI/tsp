@@ -25,7 +25,7 @@ class FileHelper {
    * @param file_name
    * @return
    */
-  vector<pair<int, int>> readDataFile(const char *file_name);
+  vector<vector<int>> readDataFile(const char *file_name);
 };
 
 #endif //TSP_FILEHELPER_H
