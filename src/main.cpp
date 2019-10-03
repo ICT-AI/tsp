@@ -2,33 +2,53 @@
 #include "./helper/FileHelper.h"
 #include "./model/Graph.h"
 #include "./solver/AbstractSolver.h"
-#include "./solver/BasicGreedy.h"
+#include "solver/SequentialGreedy.h"
+#include "./helper/Timer.h"
 
-void runTSP(const char *data_file_name, AbstractSolver *solver){
+/*****************************/
+/**** Set your test here. ****/
+/*****************************/
+static const char* DATA_FILE = "dga9698.txt";
+static const int ITERATION = 3;
+static const double TIME_LIMIT = 58.;
+
+void runTSP(const char *data_file_name, AbstractSolver *solver, int iteration, double time_limit){
   try {
     auto *fh = new FileHelper();
     auto nodes = fh->readDataFile(data_file_name);
     auto *graph = new Graph(nodes);
+    auto *timer = new Timer(time_limit);
 
     solver->setGraph(graph);
-    solver->solveAndMeasureTime();
+    timer->start();
+    solver->solve(iteration, *timer);
+    double total_time = timer->getElapsedTime();
 
-    cout << "tour: ";
-    for (int node : solver->getTour()) {
-      cout << node << " ";
+    // if tsp solved more than once
+    if (solver->getActualIteration()) {
+      cout << "tour: ";
+      for (int node : solver->getTour()) {
+        cout << node << " ";
+      }
+      cout << endl;
+
+      cout << "cost: " << solver->getCost() << endl;
+
+      cout << "time: " << total_time << endl;
+
+      cout << "iteration: " << solver->getActualIteration() << endl;
+
+      cout << "avg time: " << total_time / solver->getActualIteration() << endl;
+    } else {
+      cout << "Time over" << endl;
     }
-    cout << endl;
-
-    cout << "cost: " << solver->getCost() << endl;
-
-    cout << "time: " << solver->getElapsedTime() << endl;
   } catch (...) {
     cout << "ERROR OCCURRED" << endl;
   }
 }
 
 int main() {
-  runTSP("xql662.txt", new BasicGreedy());
+  runTSP(DATA_FILE, new SequentialGreedy(), ITERATION, TIME_LIMIT);
 
   return 0;
 }
