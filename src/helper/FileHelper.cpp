@@ -10,7 +10,7 @@ const char* FileHelper::convertToAbsolutePath(const char *file_name) {
   return filePath.replace(findPos, find.length(), replace).c_str();
 }
 
-vector<pair<int, int>> FileHelper::readDataFile(const char *file_name) {
+vector<vector<int>> FileHelper::readDataFile(const char *file_name) {
   ifstream in(this->convertToAbsolutePath(file_name));  // open data file
 
   // if file open failed, throw an exception.
@@ -18,7 +18,7 @@ vector<pair<int, int>> FileHelper::readDataFile(const char *file_name) {
     in.exceptions(ifstream::failbit);
   }
 
-  vector<pair<int, int>> nodes;
+  vector<vector<int>> node_data;
   string line_buffer;
   int node_num, x, y;
   // read line by line
@@ -28,10 +28,10 @@ vector<pair<int, int>> FileHelper::readDataFile(const char *file_name) {
     iss >> x;
     iss >> y;
 
-    nodes.emplace_back(x, y); // add to node data set
+    node_data.push_back({node_num, x, y}); // add to node data set
   }
 
   in.close(); // close data file
 
-  return nodes;
+  return node_data;
 }

@@ -4,6 +4,7 @@
 #include <vector>
 #include <utility>
 #include <cmath>
+#include "Node.h"
 
 using namespace std;
 
@@ -11,33 +12,23 @@ class Graph {
  private:
   /**
    * Node set of the graph.
-   * Each node format: (x_coord, y_coord)
    */
-  vector<pair<int ,int>> nodes;
+  vector<Node> nodes;
 
  public:
   /**
-   * Create Graph object from the node set.
+   * Create Graph object with node data.
    *
-   * @param nodes
+   * @param node_data
    */
-  Graph(vector<pair<int, int>> nodes);
+  Graph(vector<vector<int>> &node_data);
 
   /**
    * Return the node set of this graph.
    *
    * @return
    */
-  vector<pair<int, int>> getNodes();
-
-  /**
-   * Calculate the euclidean distance between two nodes.
-   *
-   * @param node1   node index
-   * @param node2   node index
-   * @return
-   */
-  float getDistance(int node1, int node2);
+  vector<Node>& getNodes();
 };
 
 #endif //TSP_GRAPH_H

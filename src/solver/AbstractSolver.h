@@ -39,6 +39,11 @@ class AbstractSolver {
 
  public:
   /**
+   * Default constructor
+   */
+  AbstractSolver() = default;
+
+  /**
    * Default destructor
    */
   virtual ~AbstractSolver() = default;
@@ -54,7 +59,7 @@ class AbstractSolver {
 
   double getElapsedTime();
 
-  vector<int> getTour();
+  vector<int>& getTour();
 };
 
 #endif //TSP_ABSTRACTSOLVER_H

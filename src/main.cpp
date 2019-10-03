@@ -28,7 +28,7 @@ void runTSP(const char *data_file_name, AbstractSolver *solver){
 }
 
 int main() {
-  runTSP("xqf131.txt", new BasicGreedy());
+  runTSP("xql662.txt", new BasicGreedy());
 
   return 0;
 }

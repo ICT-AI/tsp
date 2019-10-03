@@ -1,19 +1,13 @@
 #include "Graph.h"
 
-Graph::Graph(vector<pair<int, int>> nodes) {
-  this->nodes = nodes;
+Graph::Graph(vector<vector<int>> &node_data) {
+  this->nodes.reserve(node_data.size());
+
+  for (auto single_data : node_data) {
+    this->nodes.emplace_back(single_data[0], single_data[1], single_data[2]);
+  }
 }
 
-vector<pair<int, int>> Graph::getNodes() {
+vector<Node>& Graph::getNodes() {
   return this->nodes;
-}
-
-float Graph::getDistance(int node1, int node2) {
-  auto node1_coord = this->nodes[node1];
-  auto node2_coord = this->nodes[node2];
-
-  float dx = node1_coord.first - node2_coord.first;
-  float dy = node1_coord.second - node2_coord.second;
-
-  return sqrt(dx * dx + dy * dy);
 }
