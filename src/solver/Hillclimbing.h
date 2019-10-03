@@ -1,3 +1,6 @@
+#include <stdlib.h>
+#include <cstdlib>
+#include <list>
 #include "AbstractSolver.h"
 
 using namespace std;
@@ -14,4 +17,5 @@ class Hillclimbing: public AbstractSolver {
   Hillclimbing() = default;
 
   Hillclimbing(Graph *g);
+  void move(int startPoint); //For change edges.
 };
