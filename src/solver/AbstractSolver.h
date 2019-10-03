@@ -3,7 +3,10 @@
 
 #include <vector>
 #include <chrono>
+#include <algorithm>
+#include <limits.h>
 #include "../model/Graph.h"
+#include "../helper/Timer.h"
 
 using namespace std;
 
@@ -17,25 +20,17 @@ class AbstractSolver {
   /**
    * Cost of TSP
    */
-  int cost;
+  int cost = INT_MAX;
 
   /**
-   * Elapsed time for TSP
+   * Actual iteration of TSP solving
    */
-  double elapsedTime;
+  int actualIteration = 0;
 
   /**
    * Solution tour
    */
   vector<int> tour;
-
- protected:
-  /**
-   * Solve TSP of current graph.
-   * Core algorithm for solving TSP is here.
-   * You should implement this function.
-   */
-  virtual void solve() = 0;
 
  public:
   /**
@@ -49,15 +44,17 @@ class AbstractSolver {
   virtual ~AbstractSolver() = default;
 
   /**
-   * Solve TSP and measure elapsed time.
+   * Solve TSP of current graph.
+   * Core algorithm for solving TSP is here.
+   * You should implement this function.
    */
-  void solveAndMeasureTime();
+  virtual void solve(int iteration, Timer &timer) = 0;
 
   void setGraph(Graph *g);
 
   int getCost();
 
-  double getElapsedTime();
+  int getActualIteration();
 
   vector<int>& getTour();
 };
