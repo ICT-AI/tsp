@@ -28,7 +28,9 @@ vector<vector<int>> FileHelper::readDataFile(const char *file_name) {
     iss >> x;
     iss >> y;
 
-    node_data.push_back({node_num, x, y}); // add to node data set
+    if (node_num != 0) {  // ignore irrelevant string
+      node_data.push_back({node_num, x, y}); // add to node data set
+    }
   }
 
   in.close(); // close data file

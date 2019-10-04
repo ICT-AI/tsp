@@ -2,7 +2,8 @@
 #include "./helper/FileHelper.h"
 #include "./model/Graph.h"
 #include "./solver/AbstractSolver.h"
-#include "solver/SequentialGreedy.h"
+#include "./solver/SequentialGreedy.h"
+#include "./solver/BasicHillClimbing.h"
 #include "./helper/Timer.h"
 
 void runTSP(const char *data_file_name, AbstractSolver &solver, int iteration, double time_limit){
