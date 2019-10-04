@@ -1,11 +1,5 @@
 #include "Node.h"
 
-Node::Node() {
-  this->index = 0;
-  this->x = 0;
-  this->y = 0;
-}
-
 Node::Node(int index, int x, int y) {
   this->index = index;
   this->x = x;

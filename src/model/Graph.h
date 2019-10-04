@@ -16,6 +16,8 @@ class Graph {
   vector<Node> nodes;
 
  public:
+  Graph() = default;
+
   /**
    * Create Graph object with node data.
    *
