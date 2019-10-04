@@ -10,17 +10,19 @@
 
 using namespace std;
 
+#define LL_MAX 0x7FFFFFFFFFFFFFFFLL
+
 class AbstractSolver {
  protected:
   /**
    * Graph to solve TSP
    */
-  Graph *graph;
+  Graph *graph = nullptr;
 
   /**
-   * Cost of TSP
+   * Final cost of TSP
    */
-  int cost = INT_MAX;
+  float cost = (float)INT_MAX;
 
   /**
    * Actual iteration of TSP solving
@@ -28,7 +30,7 @@ class AbstractSolver {
   int actualIteration = 0;
 
   /**
-   * Solution tour
+   * Final solution tour
    */
   vector<Node> tour;
 
@@ -48,15 +50,17 @@ class AbstractSolver {
    * Core algorithm for solving TSP is here.
    * You should implement this function.
    */
-  virtual void solve(int iteration, Timer &timer) = 0;
+  virtual void solve(Timer &timer, long long iteration) = 0;
+
+  void solve(Timer &timer);
 
   void setGraph(Graph *g);
 
-  int getCost();
+  float getCost();
 
   int getActualIteration();
 
-  vector<int> getTour();
+  vector<Node>& getTour();
 };
 
 #endif //TSP_ABSTRACTSOLVER_H

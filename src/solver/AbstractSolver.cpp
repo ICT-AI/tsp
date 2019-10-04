@@ -1,11 +1,15 @@
 #include <chrono>
 #include "AbstractSolver.h"
 
+void AbstractSolver::solve(Timer &timer) {
+  this->solve(timer, LL_MAX);
+}
+
 void AbstractSolver::setGraph(Graph *g) {
   this->graph = g;
 }
 
-int AbstractSolver::getCost() {
+float AbstractSolver::getCost() {
   return this->cost;
 }
 
@@ -13,14 +17,7 @@ int AbstractSolver::getActualIteration() {
   return this->actualIteration;
 }
 
-vector<int> AbstractSolver::getTour() {
-  vector<int> tour_index;
-  tour_index.reserve(this->graph->getNodes().size());
-
-  for (auto node : this->tour) {
-    tour_index.push_back(node.index);
-  }
-
-  return tour_index;
+vector<Node>& AbstractSolver::getTour() {
+  return this->tour;
 }
 
