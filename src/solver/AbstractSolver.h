@@ -30,7 +30,7 @@ class AbstractSolver {
   /**
    * Solution tour
    */
-  vector<int> tour;
+  vector<Node> tour;
 
  public:
   /**
@@ -56,7 +56,7 @@ class AbstractSolver {
 
   int getActualIteration();
 
-  vector<int>& getTour();
+  vector<int> getTour();
 };
 
 #endif //TSP_ABSTRACTSOLVER_H

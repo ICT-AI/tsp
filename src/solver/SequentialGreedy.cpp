@@ -9,7 +9,7 @@ void SequentialGreedy::solve(int iteration, Timer &timer) {
     // initialize unvisited nodes, cost, tour
     list<Node> unvisited_nodes(this->graph->getNodes().begin(), this->graph->getNodes().end());
     float cost = 0.0;
-    vector<int> tour;
+    vector<Node> tour;
     tour.reserve(this->graph->getNodes().size());
 
     // set the starting node
@@ -20,7 +20,7 @@ void SequentialGreedy::solve(int iteration, Timer &timer) {
       if (iter->index == start_index) {
         curr_node = *iter;
         unvisited_nodes.erase(iter);
-        tour.push_back(curr_node.index);
+        tour.push_back(curr_node);
       }
     }
 
@@ -54,7 +54,7 @@ void SequentialGreedy::solve(int iteration, Timer &timer) {
       curr_node = *nearest_node;  // move to new node
       unvisited_nodes.erase(nearest_node);  // delete new node from unvisited node list
       cost += sqrt(min_squared_distance); // add cost
-      tour.push_back(curr_node.index);  // update tour
+      tour.push_back(curr_node);  // update tour
     }
 
     // check if current tour is better than older one
