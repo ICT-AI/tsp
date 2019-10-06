@@ -6,6 +6,11 @@ void SequentialGreedy::solve(Timer &timer, long long iteration) {
 
   // until specified iteration or entire node size
   for (int i = 0; i < min(iteration, (long long)this->graph->getNodes().size()); i++) {
+    // check if time is over
+    if (timer.isOver()) {
+      return;
+    }
+
     // initialize unvisited nodes, cost, tour
     list<Node> unvisited_nodes(this->graph->getNodes().begin(), this->graph->getNodes().end());
     float cost = 0.0;
@@ -28,11 +33,6 @@ void SequentialGreedy::solve(Timer &timer, long long iteration) {
     long long min_squared_distance, x_squared_distance, curr_squared_distance;
     // until visit all nodes
     while (!unvisited_nodes.empty()) {
-      // check if time is over
-      if (timer.isOver()) {
-        return;
-      }
-
       min_squared_distance = LL_MAX;
       for (auto iter = unvisited_nodes.begin(); iter != unvisited_nodes.end(); iter++) {
         // for early stop
