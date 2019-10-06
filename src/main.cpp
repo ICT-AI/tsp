@@ -50,10 +50,10 @@ int main() {
   /************************************/
   /**** Set your test config here. ****/
   /************************************/
-  const char* DATA_FILE = "xql662.tsp.txt";
-  AbstractSolver *SOLVER = new SequentialGreedy();
-  double TIME_LIMIT = 58.;
-  long long ITERATION = 100;
+  const char* DATA_FILE = "lsm2854.tsp.txt";
+  AbstractSolver *SOLVER = new BasicHillClimbing();
+  double TIME_LIMIT = 59.;
+  long long ITERATION = LL_MAX;
 
   runTSP(DATA_FILE, *SOLVER, TIME_LIMIT, ITERATION);
 
