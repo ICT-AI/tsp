@@ -15,7 +15,7 @@ vector<vector<int>> FileHelper::readDataFile(const char *file_name) {
 
   // if file open failed, throw an exception.
   if (in.fail()) {
-    in.exceptions(ifstream::failbit);
+    throw invalid_argument("ERROR: Could not open the file");
   }
 
   vector<vector<int>> node_data;
