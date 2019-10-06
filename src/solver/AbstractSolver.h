@@ -60,6 +60,8 @@ class AbstractSolver {
 
   int getActualIteration();
 
+  bool verifyTour();
+
   vector<Node>& getTour();
 };
 
