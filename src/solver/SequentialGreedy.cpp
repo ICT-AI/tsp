@@ -1,11 +1,11 @@
 #include "SequentialGreedy.h"
 
-void SequentialGreedy::solve(int iteration, Timer &timer) {
+void SequentialGreedy::solve(Timer &timer, long long iteration) {
   sort(this->graph->getNodes().begin(), this->graph->getNodes().end()); // sort graph node list
   deque<int> start_index_list = this->getStartIndexList();  // start node index list for iterative solving
 
   // until specified iteration or entire node size
-  for (int i = 0; i < min(iteration, (int)this->graph->getNodes().size()); i++) {
+  for (int i = 0; i < min(iteration, (long long)this->graph->getNodes().size()); i++) {
     // initialize unvisited nodes, cost, tour
     list<Node> unvisited_nodes(this->graph->getNodes().begin(), this->graph->getNodes().end());
     float cost = 0.0;
@@ -33,7 +33,7 @@ void SequentialGreedy::solve(int iteration, Timer &timer) {
         return;
       }
 
-      min_squared_distance = LONG_LONG_MAX;
+      min_squared_distance = LL_MAX;
       for (auto iter = unvisited_nodes.begin(); iter != unvisited_nodes.end(); iter++) {
         // for early stop
         // check if x distance is greater than minimum distance
@@ -58,8 +58,8 @@ void SequentialGreedy::solve(int iteration, Timer &timer) {
     }
 
     // check if current tour is better than older one
-    if ((int)cost < this->cost) {
-      this->cost = (int)cost;
+    if (cost < this->cost) {
+      this->cost = cost;
       this->tour.assign(tour.begin(), tour.end());
     }
 

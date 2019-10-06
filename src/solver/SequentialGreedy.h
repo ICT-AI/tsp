@@ -21,7 +21,7 @@ class SequentialGreedy: public AbstractSolver {
    * Solve TSP of current graph.
    * Use basic greedy algorithm(nearest neighbor).
    */
-  void solve(int iteration, Timer &timer) override;
+  void solve(Timer &timer, long long iteration) override;
 
   /**
    * Get randomly shuffled start node index list.
