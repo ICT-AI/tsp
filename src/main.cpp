@@ -6,7 +6,7 @@
 #include "./solver/BasicHillClimbing.h"
 #include "./helper/Timer.h"
 
-void runTSP(const char *data_file_name, AbstractSolver &solver, int iteration, double time_limit){
+void runTSP(const char *data_file_name, AbstractSolver &solver, double time_limit, long long iteration){
   try {
     auto *fh = new FileHelper();
     auto nodes = fh->readDataFile(data_file_name);
@@ -15,29 +15,34 @@ void runTSP(const char *data_file_name, AbstractSolver &solver, int iteration, d
 
     solver.setGraph(graph);
     timer->start();
-    solver.solve(iteration, *timer);
+    if (iteration == -1) {
+      solver.solve(*timer);
+    } else {
+      solver.solve(*timer, iteration);
+    }
     double total_time = timer->getElapsedTime();
 
-    // if tsp solved more than once
-    if (solver.getActualIteration()) {
-      cout << "tour: ";
-      for (int node : solver.getTour()) {
-        cout << node << " ";
-      }
-      cout << endl;
-
-      cout << "cost: " << solver.getCost() << endl;
-
-      cout << "time: " << total_time << endl;
-
-      cout << "iteration: " << solver.getActualIteration() << endl;
-
-      cout << "avg time: " << total_time / solver.getActualIteration() << endl;
-    } else {
-      cout << "Time over" << endl;
+    // wrong tour
+    if (!solver.verifyTour()) {
+      throw logic_error("ERROR: Tour is wrong");
     }
-  } catch (...) {
-    cout << "ERROR OCCURRED" << endl;
+
+    // tsp not solved
+    if (!solver.getActualIteration()) {
+      throw logic_error("ERROR: Time over");
+    }
+
+    cout << "tour: ";
+    for (auto node : solver.getTour()) {
+      cout << node.index << " ";
+    }
+    cout << endl;
+    cout << "cost: " << solver.getCost() << endl;
+    cout << "time: " << total_time << endl;
+    cout << "iteration: " << solver.getActualIteration() << endl;
+    cout << "avg time: " << total_time / solver.getActualIteration() << endl;
+  } catch (exception &e) {
+    cerr << e.what() << endl;
   }
 }
 
@@ -45,12 +50,12 @@ int main() {
   /************************************/
   /**** Set your test config here. ****/
   /************************************/
-  const char* DATA_FILE = "xpr2308.txt";
+  const char* DATA_FILE = "xql662.tsp.txt";
   AbstractSolver *SOLVER = new SequentialGreedy();
-  int ITERATION = INT_MAX;
   double TIME_LIMIT = 58.;
+  long long ITERATION = 100;
 
-  runTSP(DATA_FILE, *SOLVER, ITERATION, TIME_LIMIT);
+  runTSP(DATA_FILE, *SOLVER, TIME_LIMIT, ITERATION);
 
   return 0;
 }
