@@ -1,5 +1,5 @@
 #include "BasicHillClimbing.h"
-#include <iostream>
+
 void BasicHillClimbing::solve(Timer &timer, long long iteration) {
   // Initialize random tour
   this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
