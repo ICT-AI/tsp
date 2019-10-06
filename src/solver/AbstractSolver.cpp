@@ -13,7 +13,7 @@ float AbstractSolver::getCost() {
   return this->cost;
 }
 
-int AbstractSolver::getActualIteration() {
+long long AbstractSolver::getActualIteration() {
   return this->actualIteration;
 }
 

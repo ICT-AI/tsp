@@ -27,7 +27,7 @@ class AbstractSolver {
   /**
    * Actual iteration of TSP solving
    */
-  int actualIteration = 0;
+  long long actualIteration = 0;
 
   /**
    * Final solution tour
@@ -58,7 +58,7 @@ class AbstractSolver {
 
   float getCost();
 
-  int getActualIteration();
+  long long getActualIteration();
 
   bool verifyTour();
 
