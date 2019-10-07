@@ -43,7 +43,7 @@ class AbstractSolver {
   /**
    * Default destructor
    */
-  virtual ~AbstractSolver() = default;
+  ~AbstractSolver() = default;
 
   /**
    * Solve TSP of current graph.

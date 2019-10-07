@@ -2,9 +2,13 @@
 
 const char* FileHelper::convertToAbsolutePath(const char *file_name) {
   string filePath = __FILE__;
-  string find = "/src/helper/FileHelper.cpp";
+  string find = "src/helper/FileHelper.cpp";
   size_t findPos = filePath.rfind(find);
-  string replace("/resource/");
+  if (findPos == string::npos) {
+    throw runtime_error("ERROR: Could not convert to absolute path");
+  }
+
+  string replace("resource/");
   replace.append(file_name);
 
   return filePath.replace(findPos, find.length(), replace).c_str();
