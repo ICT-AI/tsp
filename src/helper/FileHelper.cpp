@@ -2,9 +2,13 @@
 
 const char* FileHelper::convertToAbsolutePath(const char *file_name) {
   string filePath = __FILE__;
-  string find = "/src/helper/FileHelper.cpp";
+  string find = "src/helper/FileHelper.cpp";
   size_t findPos = filePath.rfind(find);
-  string replace("/resource/");
+  if (findPos == string::npos) {
+    throw runtime_error("ERROR: Could not convert to absolute path");
+  }
+
+  string replace("resource/");
   replace.append(file_name);
 
   return filePath.replace(findPos, find.length(), replace).c_str();
@@ -15,7 +19,7 @@ vector<vector<int>> FileHelper::readDataFile(const char *file_name) {
 
   // if file open failed, throw an exception.
   if (in.fail()) {
-    in.exceptions(ifstream::failbit);
+    throw invalid_argument("ERROR: Could not open the file");
   }
 
   vector<vector<int>> node_data;
@@ -28,7 +32,9 @@ vector<vector<int>> FileHelper::readDataFile(const char *file_name) {
     iss >> x;
     iss >> y;
 
-    node_data.push_back({node_num, x, y}); // add to node data set
+    if (node_num != 0) {  // ignore irrelevant string
+      node_data.push_back({node_num, x, y}); // add to node data set
+    }
   }
 
   in.close(); // close data file

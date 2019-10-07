@@ -16,6 +16,8 @@ class Graph {
   vector<Node> nodes;
 
  public:
+  Graph() = default;
+
   /**
    * Create Graph object with node data.
    *
@@ -29,6 +31,8 @@ class Graph {
    * @return
    */
   vector<Node>& getNodes();
+
+  void setNodes(vector<Node>& nodes);
 };
 
 #endif //TSP_GRAPH_H

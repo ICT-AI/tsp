@@ -3,39 +3,36 @@
 
 #include <vector>
 #include <chrono>
+#include <algorithm>
+#include <limits.h>
 #include "../model/Graph.h"
+#include "../helper/Timer.h"
 
 using namespace std;
+
+#define LL_MAX 0x7FFFFFFFFFFFFFFFLL
 
 class AbstractSolver {
  protected:
   /**
    * Graph to solve TSP
    */
-  Graph *graph;
+  Graph *graph = nullptr;
 
   /**
-   * Cost of TSP
+   * Final cost of TSP
    */
-  int cost;
+  float cost = (float)INT_MAX;
 
   /**
-   * Elapsed time for TSP
+   * Actual iteration of TSP solving
    */
-  double elapsedTime;
+  long long actualIteration = 0;
 
   /**
-   * Solution tour
+   * Final solution tour
    */
-  vector<int> tour;
-
- protected:
-  /**
-   * Solve TSP of current graph.
-   * Core algorithm for solving TSP is here.
-   * You should implement this function.
-   */
-  virtual void solve() = 0;
+  vector<Node> tour;
 
  public:
   /**
@@ -46,20 +43,26 @@ class AbstractSolver {
   /**
    * Default destructor
    */
-  virtual ~AbstractSolver() = default;
+  ~AbstractSolver() = default;
 
   /**
-   * Solve TSP and measure elapsed time.
+   * Solve TSP of current graph.
+   * Core algorithm for solving TSP is here.
+   * You should implement this function.
    */
-  void solveAndMeasureTime();
+  virtual void solve(Timer &timer, long long iteration) = 0;
+
+  void solve(Timer &timer);
 
   void setGraph(Graph *g);
 
-  int getCost();
+  float getCost();
 
-  double getElapsedTime();
+  long long getActualIteration();
 
-  vector<int>& getTour();
+  bool verifyTour();
+
+  vector<Node>& getTour();
 };
 
 #endif //TSP_ABSTRACTSOLVER_H

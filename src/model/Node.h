@@ -6,20 +6,20 @@ class Node {
   /**
    * Node index
    */
-  int index;
+  int index = 0;
 
   /**
    * x coordinate
    */
-  int x;
+  int x = 0;
 
   /**
    * y coordinate
    */
-  int y;
+  int y = 0;
 
  public:
-  Node();
+  Node() = default;
 
   Node(int index, int x, int y);
 
