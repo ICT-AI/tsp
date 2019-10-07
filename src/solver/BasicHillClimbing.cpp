@@ -1,10 +1,9 @@
 #include "BasicHillClimbing.h"
 
 void BasicHillClimbing::solve(Timer &timer, long long iteration) {
-  // Initialize random tour
-  this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
-  unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-  shuffle(this->tour.begin(), this->tour.end(), default_random_engine(seed));
+  // Initialize tour
+  this->initializeTourAsGreedy(timer);
+//  this->initializeTourAsRandom();
 
   // Initialize cost
   this->cost = 0.0;
@@ -75,4 +74,20 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
       break;
     }
   }
+}
+
+void BasicHillClimbing::initializeTourAsRandom() {
+  this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
+  unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+  shuffle(this->tour.begin(), this->tour.end(), default_random_engine(seed)); // uniform random shuffle
+}
+
+void BasicHillClimbing::initializeTourAsGreedy(Timer &timer) {
+  AbstractSolver *greedySolver = new SequentialGreedy();
+  auto *graph = new Graph();
+  graph->setNodes(this->graph->getNodes());
+
+  greedySolver->setGraph(graph);
+  greedySolver->solve(timer, 2);
+  this->tour.assign(greedySolver->getTour().begin(), greedySolver->getTour().end());
 }
