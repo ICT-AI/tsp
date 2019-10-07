@@ -11,3 +11,7 @@ Graph::Graph(vector<vector<int>> &node_data) {
 vector<Node>& Graph::getNodes() {
   return this->nodes;
 }
+
+void Graph::setNodes(vector<Node> &nodes) {
+  this->nodes.assign(nodes.begin(), nodes.end());
+}

@@ -31,6 +31,8 @@ class Graph {
    * @return
    */
   vector<Node>& getNodes();
+
+  void setNodes(vector<Node>& nodes);
 };
 
 #endif //TSP_GRAPH_H
