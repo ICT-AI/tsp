@@ -17,7 +17,7 @@ class Euclidean {
    * @param y2
    * @return
    */
-  float getDistance(int x1, int y1, int x2, int y2);
+  double getDistance(int x1, int y1, int x2, int y2);
 
   /**
    * Calculate the euclidean distance between two nodes.
@@ -26,7 +26,7 @@ class Euclidean {
    * @param node2
    * @return
    */
-  float getDistance(Node &n1, Node &n2);
+  double getDistance(Node &n1, Node &n2);
 
   /**
    * Calculate the euclidean squared distance between two points.

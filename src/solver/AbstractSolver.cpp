@@ -9,7 +9,7 @@ void AbstractSolver::setGraph(Graph *g) {
   this->graph = g;
 }
 
-float AbstractSolver::getCost() {
+double AbstractSolver::getCost() {
   return this->cost;
 }
 

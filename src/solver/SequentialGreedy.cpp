@@ -13,7 +13,7 @@ void SequentialGreedy::solve(Timer &timer, long long iteration) {
 
     // initialize unvisited nodes, cost, tour
     list<Node> unvisited_nodes(this->graph->getNodes().begin(), this->graph->getNodes().end());
-    float cost = 0.0;
+    double cost = 0.;
     vector<Node> tour;
     tour.reserve(this->graph->getNodes().size());
 
@@ -26,6 +26,8 @@ void SequentialGreedy::solve(Timer &timer, long long iteration) {
         curr_node = *iter;
         unvisited_nodes.erase(iter);
         tour.push_back(curr_node);
+
+        break;
       }
     }
 
