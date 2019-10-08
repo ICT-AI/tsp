@@ -26,6 +26,8 @@ void SequentialGreedy::solve(Timer &timer, long long iteration) {
         curr_node = *iter;
         unvisited_nodes.erase(iter);
         tour.push_back(curr_node);
+
+        break;
       }
     }
 
