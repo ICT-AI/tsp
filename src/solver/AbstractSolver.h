@@ -22,7 +22,7 @@ class AbstractSolver {
   /**
    * Final cost of TSP
    */
-  float cost = (float)INT_MAX;
+  double cost = (double)INT_MAX;
 
   /**
    * Actual iteration of TSP solving
@@ -56,7 +56,7 @@ class AbstractSolver {
 
   void setGraph(Graph *g);
 
-  float getCost();
+  double getCost();
 
   long long getActualIteration();
 

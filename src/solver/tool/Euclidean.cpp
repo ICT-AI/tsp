@@ -1,13 +1,13 @@
 #include "Euclidean.h"
 
-float Euclidean::getDistance(int x1, int y1, int x2, int y2) {
-  float dx = x1 - x2;
-  float dy = y1 - y2;
+double Euclidean::getDistance(int x1, int y1, int x2, int y2) {
+  int dx = x1 - x2;
+  int dy = y1 - y2;
 
-  return sqrt(dx * dx + dy * dy);
+  return sqrt((double)(dx * dx + dy * dy));
 }
 
-float Euclidean::getDistance(Node &n1, Node &n2) {
+double Euclidean::getDistance(Node &n1, Node &n2) {
   return this->getDistance(n1.x, n1.y, n2.x, n2.y);
 }
 

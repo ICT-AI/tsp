@@ -50,7 +50,7 @@ int main() {
   /************************************/
   /**** Set your test config here. ****/
   /************************************/
-  const char* DATA_FILE = "lsm2854.tsp.txt";
+  const char* DATA_FILE = "xsc6880.tsp.txt";
   AbstractSolver *SOLVER = new BasicHillClimbing();
   double TIME_LIMIT = 59.;
   long long ITERATION = LL_MAX;

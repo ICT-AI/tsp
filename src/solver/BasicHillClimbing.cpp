@@ -6,7 +6,7 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
 //  this->initializeTourAsRandom();
 
   // Initialize cost
-  this->cost = 0.0;
+  this->cost = 0.;
   for (auto iter = this->tour.begin(); iter != this->tour.end() - 1; iter++) {
     this->cost += this->eucl->getDistance(*iter, *(iter + 1));
   }
@@ -14,7 +14,7 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
   this->actualIteration = 1;
 
   vector<Node>::iterator t1, t2, t3, t4, best_t3;
-  float old_cost1, old_cost2, new_cost1, new_cost2, curr_cost_benefit, best_cost_benefit;
+  double old_cost1, old_cost2, new_cost1, new_cost2, curr_cost_benefit, best_cost_benefit;
   bool is_change;
   // start local search
   while (this->actualIteration < iteration) {
@@ -61,7 +61,7 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
       }
 
       // tour is improved
-      if (best_cost_benefit > 0) {
+      if (best_cost_benefit > 0.000000000001) {
         reverse(t2, best_t3 + 1);
         this->cost -= best_cost_benefit;
         this->actualIteration++;
