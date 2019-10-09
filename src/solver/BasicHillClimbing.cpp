@@ -26,18 +26,15 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
     is_change = false;
 
     for (t2 = this->tour.begin(); t2 != this->tour.end() - 1; t2++) {
-      t1 = t2 - 1;
-
       if (t2 == this->tour.begin()) {
         old_cost1 = 0;
       } else {
+        t1 = t2 - 1;
         old_cost1 = this->eucl->getDistance(*t1, *t2);
       }
 
       best_cost_benefit = 0;
       for (t3 = t2 + 1; t3 != this->tour.end(); t3++) {
-        t4 = t3 + 1;
-
         if (t2 == this->tour.begin()) {
           new_cost1 = 0;
         } else {
@@ -48,6 +45,7 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
           old_cost2 = 0;
           new_cost2 = 0;
         } else {
+          t4 = t3 + 1;
           old_cost2 = this->eucl->getDistance(*t3, *t4);
           new_cost2 = this->eucl->getDistance(*t2, *t4);
         }
