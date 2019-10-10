@@ -1,3 +1,0 @@
-/home/jkkim/projects/tsp/CMakeFiles/rebuild_cache.dir
-/home/jkkim/projects/tsp/CMakeFiles/tsp.dir
-/home/jkkim/projects/tsp/CMakeFiles/edit_cache.dir

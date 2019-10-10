@@ -312,33 +312,6 @@ src/solver/BasicHillClimbing.cpp.s:
 	$(MAKE) -f CMakeFiles/tsp.dir/build.make CMakeFiles/tsp.dir/src/solver/BasicHillClimbing.cpp.s
 .PHONY : src/solver/BasicHillClimbing.cpp.s
 
-src/solver/BasicHillClimbingWithSA.o: src/solver/BasicHillClimbingWithSA.cpp.o
-
-.PHONY : src/solver/BasicHillClimbingWithSA.o
-
-# target to build an object file
-src/solver/BasicHillClimbingWithSA.cpp.o:
-	$(MAKE) -f CMakeFiles/tsp.dir/build.make CMakeFiles/tsp.dir/src/solver/BasicHillClimbingWithSA.cpp.o
-.PHONY : src/solver/BasicHillClimbingWithSA.cpp.o
-
-src/solver/BasicHillClimbingWithSA.i: src/solver/BasicHillClimbingWithSA.cpp.i
-
-.PHONY : src/solver/BasicHillClimbingWithSA.i
-
-# target to preprocess a source file
-src/solver/BasicHillClimbingWithSA.cpp.i:
-	$(MAKE) -f CMakeFiles/tsp.dir/build.make CMakeFiles/tsp.dir/src/solver/BasicHillClimbingWithSA.cpp.i
-.PHONY : src/solver/BasicHillClimbingWithSA.cpp.i
-
-src/solver/BasicHillClimbingWithSA.s: src/solver/BasicHillClimbingWithSA.cpp.s
-
-.PHONY : src/solver/BasicHillClimbingWithSA.s
-
-# target to generate assembly for a file
-src/solver/BasicHillClimbingWithSA.cpp.s:
-	$(MAKE) -f CMakeFiles/tsp.dir/build.make CMakeFiles/tsp.dir/src/solver/BasicHillClimbingWithSA.cpp.s
-.PHONY : src/solver/BasicHillClimbingWithSA.cpp.s
-
 src/solver/SequentialGreedy.o: src/solver/SequentialGreedy.cpp.o
 
 .PHONY : src/solver/SequentialGreedy.o
@@ -450,9 +423,6 @@ help:
 	@echo "... src/solver/BasicHillClimbing.o"
 	@echo "... src/solver/BasicHillClimbing.i"
 	@echo "... src/solver/BasicHillClimbing.s"
-	@echo "... src/solver/BasicHillClimbingWithSA.o"
-	@echo "... src/solver/BasicHillClimbingWithSA.i"
-	@echo "... src/solver/BasicHillClimbingWithSA.s"
 	@echo "... src/solver/SequentialGreedy.o"
 	@echo "... src/solver/SequentialGreedy.i"
 	@echo "... src/solver/SequentialGreedy.s"

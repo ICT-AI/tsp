@@ -4,7 +4,7 @@
 #include "./solver/AbstractSolver.h"
 #include "./solver/SequentialGreedy.h"
 #include "./solver/BasicHillClimbing.h"
-#include "./solver/BasicHillClimbingWithSA.h"
+//#include "./solver/BasicHillClimbingWithSA.h"
 #include "./solver/MapSearchGreedy.h"
 #include "./helper/Timer.h"
 

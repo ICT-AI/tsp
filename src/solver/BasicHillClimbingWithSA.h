@@ -2,6 +2,7 @@
 #define TSP_BASICHILLCLIMBING_H
 
 #include <random>
+#include <algorithm>
 #include "AbstractSolver.h"
 #include "SequentialGreedy.h"
 #include "./tool/Euclidean.h"
