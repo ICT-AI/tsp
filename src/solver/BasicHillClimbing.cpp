@@ -1,9 +1,11 @@
 #include "BasicHillClimbing.h"
+#include "MSTGreedy.h"
 
 void BasicHillClimbing::solve(Timer &timer, long long iteration) {
   // Initialize tour
-  this->initializeTourAsGreedy(timer);
+//  this->initializeTourAsGreedy(timer);
 //  this->initializeTourAsRandom();
+  this->initializeTourAsMST(timer);
 
   // Initialize cost
   this->cost = 0.;
@@ -87,5 +89,15 @@ void BasicHillClimbing::initializeTourAsGreedy(Timer &timer) {
 
   greedySolver->setGraph(graph);
   greedySolver->solve(timer, 2);
+  this->tour.assign(greedySolver->getTour().begin(), greedySolver->getTour().end());
+}
+
+void BasicHillClimbing::initializeTourAsMST(Timer &timer) {
+  AbstractSolver *greedySolver = new MSTGreedy();
+  auto *graph = new Graph();
+  graph->setNodes(this->graph->getNodes());
+
+  greedySolver->setGraph(graph);
+  greedySolver->solve(timer, LL_MAX);
   this->tour.assign(greedySolver->getTour().begin(), greedySolver->getTour().end());
 }

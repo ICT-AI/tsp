@@ -41,6 +41,8 @@ class BasicHillClimbing: public AbstractSolver {
    * @param timer
    */
   void initializeTourAsGreedy(Timer &timer);
+
+  void initializeTourAsMST(Timer &timer);
 };
 
 #endif //TSP_BASICHILLCLIMBING_H
