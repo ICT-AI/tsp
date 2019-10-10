@@ -34,3 +34,6 @@ vector<Node>& AbstractSolver::getTour() {
   return this->tour;
 }
 
+vector<vector<Node>>& AbstractSolver::getTourList() {
+  return this->tourList;
+}

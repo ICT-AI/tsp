@@ -20,7 +20,7 @@ class AbstractSolver {
   Graph *graph = nullptr;
 
   /**
-   * Final cost of TSP
+   * Best cost
    */
   double cost = (double)INT_MAX;
 
@@ -30,9 +30,14 @@ class AbstractSolver {
   long long actualIteration = 0;
 
   /**
-   * Final solution tour
+   * Best tour
    */
   vector<Node> tour;
+
+  /**
+   * All tour list
+   */
+  vector<vector<Node>> tourList;
 
  public:
   /**
@@ -63,6 +68,8 @@ class AbstractSolver {
   bool verifyTour();
 
   vector<Node>& getTour();
+
+  vector<vector<Node>>& getTourList();
 };
 
 #endif //TSP_ABSTRACTSOLVER_H
