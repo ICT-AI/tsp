@@ -4,6 +4,9 @@
 #include "./solver/AbstractSolver.h"
 #include "./solver/SequentialGreedy.h"
 #include "./solver/BasicHillClimbing.h"
+#include "./solver/MapSearchGreedy.h"
+#include "./solver/LateAcceptanceHillClimbing.h"
+#include "./solver/MSTGreedy.h"
 #include "./helper/Timer.h"
 
 void runTSP(const char *data_file_name, AbstractSolver &solver, double time_limit, long long iteration){
@@ -50,7 +53,7 @@ int main() {
   /************************************/
   /**** Set your test config here. ****/
   /************************************/
-  const char* DATA_FILE = "xsc6880.tsp.txt";
+  const char* DATA_FILE = "dbj2924.tsp.txt";
   AbstractSolver *SOLVER = new BasicHillClimbing();
   double TIME_LIMIT = 59.;
   long long ITERATION = LL_MAX;
