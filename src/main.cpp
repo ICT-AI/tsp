@@ -5,7 +5,6 @@
 #include "./solver/SequentialGreedy.h"
 #include "./solver/BasicHillClimbing.h"
 #include "./solver/MapSearchGreedy.h"
-#include "./solver/LateAcceptanceHillClimbing.h"
 #include "./solver/MSTGreedy.h"
 #include "./helper/Timer.h"
 
@@ -55,7 +54,7 @@ int main() {
   /************************************/
   const char* DATA_FILE = "dbj2924.tsp.txt";
   AbstractSolver *SOLVER = new BasicHillClimbing();
-  double TIME_LIMIT = 59.;
+  double TIME_LIMIT = 57.;
   long long ITERATION = LL_MAX;
 
   runTSP(DATA_FILE, *SOLVER, TIME_LIMIT, ITERATION);

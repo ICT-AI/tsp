@@ -22,6 +22,8 @@ class BasicHillClimbing: public AbstractSolver {
    */
   void solve(Timer& timer, long long iteration) override;
 
+  double kick(vector<Node> &currTour);
+
   /**
    * Hill climbing is local search method.
    * Solution of local search is improved step by step.
