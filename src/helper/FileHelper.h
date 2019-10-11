@@ -5,6 +5,7 @@
 #include <utility>
 #include <fstream>
 #include <sstream>
+#include "../model/Node.h"
 
 using namespace std;
 
@@ -26,6 +27,8 @@ class FileHelper {
    * @return
    */
   vector<vector<int>> readDataFile(const char *file_name);
+
+  void writeTourAsFile(const char *file_name, vector<Node> &tour);
 };
 
 #endif //TSP_FILEHELPER_H

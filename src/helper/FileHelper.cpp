@@ -41,3 +41,13 @@ vector<vector<int>> FileHelper::readDataFile(const char *file_name) {
 
   return node_data;
 }
+
+void FileHelper::writeTourAsFile(const char *file_name, vector<Node> &tour) {
+  ofstream out(this->convertToAbsolutePath(file_name));
+
+  for (auto node : tour) {
+    out << node.index << endl;
+  }
+
+  out.close();
+}
