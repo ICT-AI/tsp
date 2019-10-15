@@ -23,7 +23,7 @@ class FileHelper {
    * @param file_name
    * @return
    */
-  const char* convertToResourcePath(const char *file_name);
+  string convertToResourcePath(const char *file_name);
 
   /**
    * Convert result data file name to absolute file path.
@@ -31,7 +31,7 @@ class FileHelper {
    * @param file_name
    * @return
    */
-  const char* convertToResultPath(const char *file_name);
+  string convertToResultPath(const char *file_name);
 
  public:
   /**
