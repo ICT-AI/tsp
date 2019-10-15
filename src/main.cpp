@@ -5,7 +5,6 @@
 #include "./solver/SequentialGreedy.h"
 #include "./solver/BasicHillClimbing.h"
 #include "./solver/MapSearchGreedy.h"
-#include "./solver/LateAcceptanceHillClimbing.h"
 #include "./solver/MSTGreedy.h"
 #include "./helper/Timer.h"
 
@@ -35,6 +34,13 @@ void runTSP(const char *data_file_name, AbstractSolver &solver, double time_limi
       throw logic_error("ERROR: Time over");
     }
 
+    // output result as file
+//    string output_file_name(data_file_name);
+//    string delimiter(".");
+//    output_file_name = output_file_name.substr(0, output_file_name.find(delimiter));
+//    output_file_name.append(".result.txt");
+//    fh->writeTourAsFile(output_file_name.c_str(), solver.getTour());
+
     cout << "tour: ";
     for (auto node : solver.getTour()) {
       cout << node.index << " ";
@@ -55,7 +61,7 @@ int main() {
   /************************************/
   const char* DATA_FILE = "dbj2924.tsp.txt";
   AbstractSolver *SOLVER = new BasicHillClimbing();
-  double TIME_LIMIT = 59.;
+  double TIME_LIMIT = 57.;
   long long ITERATION = LL_MAX;
 
   runTSP(DATA_FILE, *SOLVER, TIME_LIMIT, ITERATION);

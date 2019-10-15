@@ -1,5 +1,5 @@
 #include "MSTGreedy.h"
-#include <iostream>
+
 void MSTGreedy::solve(Timer &timer, long long iteration) {
   primMST();
   findOddIndices();
