@@ -34,11 +34,12 @@ void runTSP(const char *data_file_name, AbstractSolver &solver, double time_limi
       throw logic_error("ERROR: Time over");
     }
 
-    string output_file_name(data_file_name);
-    string delimiter(".");
-    output_file_name = output_file_name.substr(0, output_file_name.find(delimiter));
-    output_file_name.append(".result.txt");
-    fh->writeTourAsFile(output_file_name.c_str(), solver.getTour());
+    // output result as file
+//    string output_file_name(data_file_name);
+//    string delimiter(".");
+//    output_file_name = output_file_name.substr(0, output_file_name.find(delimiter));
+//    output_file_name.append(".result.txt");
+//    fh->writeTourAsFile(output_file_name.c_str(), solver.getTour());
 
     cout << "tour: ";
     for (auto node : solver.getTour()) {

@@ -9,6 +9,12 @@
 
 using namespace std;
 
+/**
+ * Define below directories.
+ */
+#define RESOURCE_DIR "../resource/"
+#define RESULT_DIR "../result/"
+
 class FileHelper {
  private:
   /**
@@ -17,7 +23,15 @@ class FileHelper {
    * @param file_name
    * @return
    */
-  const char* convertToAbsolutePath(const char *file_name);
+  const char* convertToResourcePath(const char *file_name);
+
+  /**
+   * Convert result data file name to absolute file path.
+   *
+   * @param file_name
+   * @return
+   */
+  const char* convertToResultPath(const char *file_name);
 
  public:
   /**
