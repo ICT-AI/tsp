@@ -64,7 +64,6 @@ void SequentialGreedy::solve(Timer &timer, long long iteration) {
       this->cost = cost;
       this->tour.assign(tour.begin(), tour.end());
     }
-    this->tourList.emplace_back(tour);
 
     this->actualIteration++;  // increase solve count
   }

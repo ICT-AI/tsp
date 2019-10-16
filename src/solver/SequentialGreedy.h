@@ -4,18 +4,11 @@
 #include <list>
 #include <deque>
 #include <random>
-#include "AbstractSolver.h"
-#include "./tool/Euclidean.h"
+#include "AbstractGreedy.h"
 
 using namespace std;
 
-class SequentialGreedy: public AbstractSolver {
- protected:
-  /**
-   * Tool for calculating euclidean distance
-   */
-  Euclidean *eucl = new Euclidean();
-
+class SequentialGreedy: public AbstractGreedy {
  protected:
   /**
    * Solve TSP of current graph.

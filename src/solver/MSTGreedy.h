@@ -2,16 +2,10 @@
 #define TSP_MSTGREEDY_H
 
 #include <stack>
-#include "AbstractSolver.h"
-#include "./tool/Euclidean.h"
+#include "AbstractGreedy.h"
 
-class MSTGreedy: public AbstractSolver {
+class MSTGreedy: public AbstractGreedy {
  protected:
-  /**
-   * Tool for calculating euclidean distance
-   */
-  Euclidean *eucl = new Euclidean();
-
   vector<deque<int>> mst;
 
   vector<int> oddIndices;
