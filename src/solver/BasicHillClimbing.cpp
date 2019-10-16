@@ -3,9 +3,10 @@
 
 void BasicHillClimbing::solve(Timer &timer, long long iteration) {
   // Initialize tour
-//  this->initializeTourAsGreedy(timer);
-//  this->initializeTourAsRandom();
-  this->initializeTourAsMST(timer);
+  this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
+  this->initializeAsMSTGreedy(timer);
+//  this->initializeAsRandom();
+//  this->initializeAsSequentialGreedy(timer);
 
   // Initialize cost
   this->cost = 0.;
@@ -84,8 +85,8 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
         this->cost = currCost;
       }
 
-      currCost = this->kick(currTour);
-//      break;
+//      currCost = this->kick(currTour);
+      break;
     }
   }
 }
@@ -122,30 +123,4 @@ double BasicHillClimbing::kick(vector<Node> &currTour) {
   }
 
   return cost;
-}
-
-void BasicHillClimbing::initializeTourAsRandom() {
-  this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
-  unsigned seed = chrono::system_clock::now().time_since_epoch().count();
-  shuffle(this->tour.begin(), this->tour.end(), default_random_engine(seed)); // uniform random shuffle
-}
-
-void BasicHillClimbing::initializeTourAsGreedy(Timer &timer) {
-  AbstractSolver *greedySolver = new SequentialGreedy();
-  auto *graph = new Graph();
-  graph->setNodes(this->graph->getNodes());
-
-  greedySolver->setGraph(graph);
-  greedySolver->solve(timer, 2);
-  this->tour.assign(greedySolver->getTour().begin(), greedySolver->getTour().end());
-}
-
-void BasicHillClimbing::initializeTourAsMST(Timer &timer) {
-  AbstractSolver *greedySolver = new MSTGreedy();
-  auto *graph = new Graph();
-  graph->setNodes(this->graph->getNodes());
-
-  greedySolver->setGraph(graph);
-  greedySolver->solve(timer, LL_MAX);
-  this->tour.assign(greedySolver->getTour().begin(), greedySolver->getTour().end());
 }
