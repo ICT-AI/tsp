@@ -4,8 +4,8 @@
 void BasicHillClimbing::solve(Timer &timer, long long iteration) {
   // Initialize tour
   this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
-  this->initializeAsMSTGreedy(timer);
-//  this->initializeAsRandom();
+//  this->initializeAsMSTGreedy(timer);
+  this->initializeAsRandom();
 //  this->initializeAsSequentialGreedy(timer);
 
   // Initialize cost
@@ -14,10 +14,10 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
     this->cost += this->eucl->getDistance(*iter, *(iter + 1));
   }
 
-  vector<Node> currTour(this->tour.begin(), this->tour.end());
-  double currCost = this->cost;
-
   this->actualIteration = 1;
+
+  vector<Node> currTour(this->tour);
+  double currCost = this->cost;
 
   vector<Node>::iterator t1, t2, t3, t4, best_t3;
   double old_cost1, old_cost2, new_cost1, new_cost2, curr_cost_benefit, best_cost_benefit;

@@ -16,9 +16,13 @@ class BasicSA: public AbstractLocalSearch {
 
   void initializeTemperature();
 
-  void updateTemperature();
+  void cooling(double energy, double delta);
 
-  double calculateAcceptanceProbability(double cost_diff);
+  bool isAccept(double delta);
+
+  double calculateAcceptanceProbability(double delta);
+
+  double uniformRandom();
 };
 
 #endif //TSP_BASICSA_H
