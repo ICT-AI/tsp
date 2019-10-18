@@ -2,6 +2,7 @@
 #define TSP_BASICSA_H
 
 #include "AbstractLocalSearch.h"
+#include "BasicHillClimbing.h"
 
 class BasicSA: public AbstractLocalSearch {
  protected:

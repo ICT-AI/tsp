@@ -32,6 +32,13 @@ class Timer {
   double getElapsedTime();
 
   /**
+   * Get current remaining time.
+   *
+   * @return
+   */
+  double getRemainingTime();
+
+  /**
    * Check if time is over.
    *
    * @return

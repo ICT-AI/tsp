@@ -6,7 +6,7 @@ void BasicSA::solve(Timer &timer, long long iteration) {
   // initialize tour
   this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
 //  this->initializeAsMSTGreedy(timer);
-//  this->initializeAsRandom();
+  this->initializeAsRandom();
 
   // initialize cost
   this->cost = 0.;
@@ -20,50 +20,61 @@ void BasicSA::solve(Timer &timer, long long iteration) {
 
   vector<Node> currTour(this->tour);
   double currCost = this->cost;
-  auto neighbours = new NeighbourManager();
+  vector<Node> semiOptTour(this->tour);
+  double semiOptCost = this->cost;
+  double tempStageCost = this->cost;
+//  auto neighbours = new NeighbourManager();
   vector<Node>::iterator t1, t2, t3, t4;
   double old_cost1, old_cost2, new_cost1, new_cost2, delta;
   pair<int, int> neighbour;
 
+  int accept_count = 0;
+
   // start local search
   while (this->actualIteration < iteration) {
-//    // check if time is over
-//    if (timer.isOver()) {
-//      if (currCost < this->cost) {
-//        this->cost = currCost;
-//        this->tour.assign(currTour.begin(), currTour.end());
-//      }
-//
-//      return;
-//    }
-
-//    random_device rn;
-//    mt19937_64 rnd(rn());
-//    uniform_int_distribution<int> range1(0, currTour.size() - 2);
+    random_device rn;
+    mt19937_64 rnd(rn());
+    uniform_int_distribution<int> range1(0, currTour.size() - 2);
 
     // pick random neighbour
-    neighbours->initializeAsRandom(currTour.size());
-    while (!neighbours->isEmpty()) {
+//    neighbours->initializeAsRandom(currTour.size());
+    while (true) {
       // check if time is over
-      if (timer.isOver()) {
-        if (currCost < this->cost) {
-          this->cost = currCost;
-          this->tour.assign(currTour.begin(), currTour.end());
+//      if (timer.isOver()) {
+//        if (currCost < this->cost) {
+//          this->cost = currCost;
+//          this->tour.assign(currTour.begin(), currTour.end());
+//        }
+//
+//        return;
+//      }
+
+      if (timer.getRemainingTime() < 7. || this->temperature < 0.0000000001) {
+        AbstractLocalSearch *hill_climber = new BasicHillClimbing();
+        auto graph = new Graph();
+        graph->setNodes(currTour);
+        hill_climber->setGraph(graph);
+        hill_climber->solve(timer, LL_MAX);
+
+        this->tour.assign(hill_climber->getTour().begin(), hill_climber->getTour().end());
+        this->cost = 0.;
+        for (auto iter = this->tour.begin(); iter != this->tour.end() - 1; iter++) {
+          this->cost += this->eucl->getDistance(*iter, *(iter + 1));
         }
 
         return;
       }
 
-      neighbour = neighbours->popNeighbour();
+//      neighbour = neighbours->popNeighbour();
 
-//      int first = range1(rnd);
-//      uniform_int_distribution<int> range2(first + 1, currTour.size() - 1);
-//      int second = range2(rnd);
-//      t2 = currTour.begin() + first;
-//      t3 = currTour.begin() + second;
+      int first = range1(rnd);
+      uniform_int_distribution<int> range2(first + 1, currTour.size() - 1);
+      int second = range2(rnd);
+      t2 = currTour.begin() + first;
+      t3 = currTour.begin() + second;
 
-      t2 = currTour.begin() + neighbour.first;
-      t3 = currTour.begin() + neighbour.second;
+//      t2 = currTour.begin() + neighbour.first;
+//      t3 = currTour.begin() + neighbour.second;
       t1 = t2 - 1;
       t4 = t3 + 1;
 
@@ -88,12 +99,26 @@ void BasicSA::solve(Timer &timer, long long iteration) {
         reverse(t2, t3 + 1);
         currCost += delta;
         this->actualIteration++;
+        accept_count++;
 
-        cout << this->temperature << endl;
-        cout << currCost << endl << endl;
+        if (currCost < semiOptCost) {
+          semiOptCost = currCost;
+          semiOptTour.assign(currTour.begin(), currTour.end());
+        }
+
+        if (accept_count == 395) {
+          currCost = semiOptCost;
+          currTour.assign(semiOptTour.begin(), semiOptTour.end());
+
+          this->cooling(tempStageCost, semiOptCost - tempStageCost);
+          tempStageCost = semiOptCost;
+          accept_count = 0;
+          semiOptCost = LL_MAX;
+
+          cout << this->temperature << endl;
+          cout << currCost << endl << endl;
+        }
       }
-
-      this->cooling(currCost, delta);
     }
   }
 }
@@ -101,17 +126,20 @@ void BasicSA::solve(Timer &timer, long long iteration) {
 void BasicSA::initializeTemperature() {
   double mean_cost = this->cost / this->getTour().size();
 
-//  this->temperature = maximum_distance;
-  this->temperature = 300.;
+  this->temperature = 10 * mean_cost;
 }
 
 void BasicSA::cooling(double energy, double delta) {
-  this->temperature = max(0., this->temperature - 0.0000003);
+  double cooling_rate = 0.03;
+  this->temperature *= (1 - cooling_rate);
 
-  if (delta < 0.) {
-    double cooling_rate = -0.01 * delta / energy;
-    this->temperature *= (1 - cooling_rate);
-  }
+//  double cooling_rate = (-3. * delta) / energy;
+//  this->temperature *= (1 - cooling_rate);
+
+//  if (delta < 0.) {
+//    double cooling_rate = (-3 * delta) / energy;
+//    this->temperature *= (1 - cooling_rate);
+//  }
 }
 
 bool BasicSA::isAccept(double delta) {
@@ -129,7 +157,9 @@ bool BasicSA::isAccept(double delta) {
 
 double BasicSA::calculateAcceptanceProbability(double delta) {
   double exponent = delta / this->temperature;
-  double probability = 1 / (1 + pow(M_E, exponent));
+//  double probability = 1 / (1 + pow(M_E, exponent));
+  double probability = pow(M_E, -1 * exponent);
+//  cout << probability << endl;
 
   return probability;
 }
