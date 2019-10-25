@@ -30,6 +30,16 @@ class AbstractLocalSearch: public AbstractSolver {
    * @param timer
    */
   void initializeAsMSTGreedy(Timer &timer);
+
+ public:
+  /**
+   * Set graph and initial tour.
+   * If you want to start with specific tour,
+   * use this method rather than `setGraph`.
+   *
+   * @param g
+   */
+  void setGraphAndTour(Graph *g);
 };
 
 #endif //TSP_ABSTRACTLOCALSEARCH_H

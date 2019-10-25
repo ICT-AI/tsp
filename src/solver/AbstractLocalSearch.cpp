@@ -26,3 +26,8 @@ void AbstractLocalSearch::initializeAsMSTGreedy(Timer &timer) {
 
   this->tour.assign(solver->getTour().begin(), solver->getTour().end());
 }
+
+void AbstractLocalSearch::setGraphAndTour(Graph *g) {
+  this->graph = g;
+  this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
+}

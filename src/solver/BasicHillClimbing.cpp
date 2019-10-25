@@ -3,10 +3,9 @@
 
 void BasicHillClimbing::solve(Timer &timer, long long iteration) {
   // Initialize tour
-  this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
-//  this->initializeAsMSTGreedy(timer);
-//  this->initializeAsRandom();
-//  this->initializeAsSequentialGreedy(timer);
+  if (this->tour.empty()) {
+    this->initializeAsMSTGreedy(timer);
+  }
 
   // Initialize cost
   this->cost = 0.;

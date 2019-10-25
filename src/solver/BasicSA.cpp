@@ -4,9 +4,10 @@
 
 void BasicSA::solve(Timer &timer, long long iteration) {
   // initialize tour
-  this->tour.assign(this->graph->getNodes().begin(), this->graph->getNodes().end());
-//  this->initializeAsMSTGreedy(timer);
-  this->initializeAsRandom();
+  if (this->tour.empty()) {
+    this->initializeAsRandom();
+    //  this->initializeAsMSTGreedy(timer);
+  }
 
   // initialize cost
   this->cost = 0.;
@@ -53,7 +54,7 @@ void BasicSA::solve(Timer &timer, long long iteration) {
         AbstractLocalSearch *hill_climber = new BasicHillClimbing();
         auto graph = new Graph();
         graph->setNodes(currTour);
-        hill_climber->setGraph(graph);
+        hill_climber->setGraphAndTour(graph);
         hill_climber->solve(timer, LL_MAX);
 
         this->tour.assign(hill_climber->getTour().begin(), hill_climber->getTour().end());
