@@ -7,6 +7,7 @@
 #include <limits.h>
 #include "../model/Graph.h"
 #include "../helper/Timer.h"
+#include "../solver/tool/Euclidean.h"
 
 using namespace std;
 
@@ -20,7 +21,7 @@ class AbstractSolver {
   Graph *graph = nullptr;
 
   /**
-   * Final cost of TSP
+   * Best cost
    */
   double cost = (double)INT_MAX;
 
@@ -30,9 +31,14 @@ class AbstractSolver {
   long long actualIteration = 0;
 
   /**
-   * Final solution tour
+   * Best tour
    */
   vector<Node> tour;
+
+  /**
+   * Tool for calculating euclidean distance
+   */
+  Euclidean *eucl = new Euclidean();
 
  public:
   /**

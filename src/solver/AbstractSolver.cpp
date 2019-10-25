@@ -33,4 +33,3 @@ bool AbstractSolver::verifyTour() {
 vector<Node>& AbstractSolver::getTour() {
   return this->tour;
 }
-
