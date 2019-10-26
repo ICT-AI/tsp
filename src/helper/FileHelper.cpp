@@ -1,18 +1,18 @@
 #include "FileHelper.h"
 #include <iostream>
 
-const char* FileHelper::convertToResourcePath(const char *file_name) {
+string FileHelper::convertToResourcePath(const char *file_name) {
   string filePath(RESOURCE_DIR);
   filePath.append(file_name);
 
-  return filePath.c_str();
+  return filePath;
 }
 
-const char* FileHelper::convertToResultPath(const char *file_name) {
+string FileHelper::convertToResultPath(const char *file_name) {
   string filePath(RESULT_DIR);
   filePath.append(file_name);
 
-  return filePath.c_str();
+  return filePath;
 }
 
 vector<vector<int>> FileHelper::readDataFile(const char *file_name) {

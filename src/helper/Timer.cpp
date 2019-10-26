@@ -14,6 +14,10 @@ double Timer::getElapsedTime() {
   return elapsed.count();
 }
 
+double Timer::getRemainingTime() {
+  return this->timeLimit - this->getElapsedTime();
+}
+
 bool Timer::isOver() {
   return (this->getElapsedTime() >= this->timeLimit);
 }

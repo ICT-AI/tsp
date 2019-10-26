@@ -21,3 +21,12 @@ long long Euclidean::getSquaredDistance(int x1, int y1, int x2, int y2) {
 long long Euclidean::getSquaredDistance(Node &n1, Node &n2) {
   return this->getSquaredDistance(n1.x, n1.y, n2.x, n2.y);
 }
+
+double Euclidean::getTourCost(vector<Node> &tour) {
+  double cost = 0.;
+  for (auto iter = tour.begin(); iter != tour.end() - 1; iter++) {
+    cost += this->getDistance(*iter, *(iter + 1));
+  }
+
+  return cost;
+}

@@ -7,6 +7,7 @@
 #include <limits.h>
 #include "../model/Graph.h"
 #include "../helper/Timer.h"
+#include "../solver/tool/Euclidean.h"
 
 using namespace std;
 
@@ -35,9 +36,9 @@ class AbstractSolver {
   vector<Node> tour;
 
   /**
-   * All tour list
+   * Tool for calculating euclidean distance
    */
-  vector<vector<Node>> tourList;
+  Euclidean *eucl = new Euclidean();
 
  public:
   /**
@@ -68,8 +69,6 @@ class AbstractSolver {
   bool verifyTour();
 
   vector<Node>& getTour();
-
-  vector<vector<Node>>& getTourList();
 };
 
 #endif //TSP_ABSTRACTSOLVER_H

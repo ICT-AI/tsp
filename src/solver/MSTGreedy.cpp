@@ -11,9 +11,39 @@ void MSTGreedy::solve(Timer &timer, long long iteration) {
   for (auto iter = this->tour.begin(); iter != this->tour.end() - 1; iter++) {
     this->cost += this->eucl->getDistance(*iter, *(iter + 1));
   }
-
   this->actualIteration++;
+
+  /*
+  int iter = 3;
+  //after greed PerfectMatching, random PerfectMathcing
+  while (iter--) {
+	  for (int i = 0; i < this->tour.size() - 4; i++) {
+		  double prev = 0.;
+		  prev += this->eucl->getDistance(this->tour[i], this->tour[i + 1]);
+		  prev += this->eucl->getDistance(this->tour[i + 1], this->tour[i + 2]);
+		  prev += this->eucl->getDistance(this->tour[i + 2], this->tour[i + 3]);
+
+		  double next = 0.;
+		  next += this->eucl->getDistance(this->tour[i], this->tour[i + 2]);
+		  next += this->eucl->getDistance(this->tour[i + 2], this->tour[i + 1]);
+		  next += this->eucl->getDistance(this->tour[i + 1], this->tour[i + 3]);
+
+		  if (prev > next) {
+			  Node temp = this->tour[i + 1];
+			  this->tour[i + 1] = this->tour[i +
+				  2];
+			  this->tour[i + 2] = temp;
+		  }
+	  }
+  }
+  double tcost = 0.;
+  for (auto iter = this->tour.begin(); iter != this->tour.end() - 1; iter++) {
+	  tcost += this->eucl->getDistance(*iter, *(iter + 1));
+  }
+  this->cost = tcost;
+  */
 }
+
 
 void MSTGreedy::primMST() {
   vector<Node> nodes(this->graph->getNodes());
@@ -68,10 +98,37 @@ void MSTGreedy::findOddIndices() {
     }
   }
 }
+/*
+void MSTGreedy::perfectMatching() {
+	vector<Node> nodes(this->graph->getNodes());
+	vector<int>::iterator curr, next, nearest;
+	long long min, temp_dist;
+
+	while (!this->oddIndices.empty()) {
+		curr = this->oddIndices.begin();
+		min = LL_MAX;
+		for (next = curr + 1; next != this->oddIndices.end(); next++) {
+			temp_dist = this->eucl->getSquaredDistance(nodes[*curr], nodes[*next]);
+
+			if (temp_dist < min) {
+				min = temp_dist;
+				nearest = next;
+			}
+		}
+
+		this->mst[*curr].push_back(*nearest);
+		this->mst[*nearest].push_back(*curr);
+
+		this->oddIndices.erase(nearest);
+		this->oddIndices.erase(curr);
+	}
+}
+*/
 
 void MSTGreedy::perfectMatching() {
   vector<Node> nodes(this->graph->getNodes());
   vector<int>::iterator curr, next, nearest;
+  vector<pair<int, int>> oddVectexPairs;
   long long min, temp_dist;
 
   while (!this->oddIndices.empty()) {
@@ -85,13 +142,53 @@ void MSTGreedy::perfectMatching() {
         nearest = next;
       }
     }
-
-    this->mst[*curr].push_back(*nearest);
-    this->mst[*nearest].push_back(*curr);
+    oddVectexPairs.push_back(make_pair(*curr, *nearest));
 
     this->oddIndices.erase(nearest);
     this->oddIndices.erase(curr);
   }
+  int count = 3;
+  while (count--) {
+    for (int i = 0; i < oddVectexPairs.size(); i++) {
+      for (int j = 0; j < oddVectexPairs.size(); j++) {
+        int curr = i;
+        int next = j;
+        double costx = 0.;
+        double costy = 0.;
+        double costc = 0.;
+        costx += this->eucl->getDistance(nodes[oddVectexPairs[curr].first], nodes[oddVectexPairs[curr].second]);
+        costx += this->eucl->getDistance(nodes[oddVectexPairs[next].first], nodes[oddVectexPairs[next].second]);
+
+        costy += this->eucl->getDistance(nodes[oddVectexPairs[curr].first], nodes[oddVectexPairs[next].first]);
+        costy += this->eucl->getDistance(nodes[oddVectexPairs[curr].second], nodes[oddVectexPairs[next].second]);
+
+        costc += this->eucl->getDistance(nodes[oddVectexPairs[curr].first], nodes[oddVectexPairs[next].second]);
+        costc += this->eucl->getDistance(nodes[oddVectexPairs[next].first], nodes[oddVectexPairs[curr].second]);
+
+        if (costx < costy && costx < costc) {
+
+        }
+        if (costy < costx && costy < costc) {
+          int temp = oddVectexPairs[curr].second;
+          oddVectexPairs[curr].second = oddVectexPairs[next].first;
+          oddVectexPairs[next].first = temp;
+        }
+        if (costc < costx && costc < costy) {
+          int temp = oddVectexPairs[curr].second;
+          oddVectexPairs[curr].second = oddVectexPairs[next].second;
+          oddVectexPairs[next].second = temp;
+        }
+
+      }
+    }
+
+  }
+
+  for (auto pair : oddVectexPairs) {
+    this->mst[pair.first].push_back(pair.second);
+    this->mst[pair.second].push_back(pair.first);
+  }
+
 }
 
 void MSTGreedy::makeEulerian() {

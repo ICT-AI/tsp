@@ -2,6 +2,7 @@
 #define TSP_EUCLIDEAN_H
 
 #include <cmath>
+#include <vector>
 #include "../../model/Node.h"
 
 using namespace std;
@@ -47,6 +48,8 @@ class Euclidean {
    * @return
    */
   long long getSquaredDistance(Node &n1, Node &n2);
+
+  double getTourCost(vector<Node> &tour);
 };
 
 #endif //TSP_EUCLIDEAN_H
