@@ -61,7 +61,7 @@ int main() {
   /************************************/
   /**** Set your test config here. ****/
   /************************************/
-  const char* DATA_FILE = "xmc10150.tsp.txt";
+  const char* DATA_FILE = "lap7454.tsp.txt";
   AbstractSolver *SOLVER = new BasicSA();
   double TIME_LIMIT = 179.;
   long long ITERATION = LL_MAX;
