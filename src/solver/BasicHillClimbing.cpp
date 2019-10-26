@@ -7,12 +7,6 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
     this->initializeAsMSTGreedy(timer);
   }
 
-  // Initialize cost
-  this->cost = 0.;
-  for (auto iter = this->tour.begin(); iter != this->tour.end() - 1; iter++) {
-    this->cost += this->eucl->getDistance(*iter, *(iter + 1));
-  }
-
   this->actualIteration = 1;
 
   vector<Node> currTour(this->tour);
@@ -74,6 +68,13 @@ void BasicHillClimbing::solve(Timer &timer, long long iteration) {
         currCost -= best_cost_benefit;
         this->actualIteration++;
         is_change = true;
+
+        if (this->actualIteration >= iteration) {
+          this->cost = currCost;
+          this->tour.assign(currTour.begin(), currTour.end());
+
+          break;
+        }
       }
     }
 
